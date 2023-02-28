@@ -1,31 +1,32 @@
 import React from "react";
-import { GoogleLogin , googleLogout } from "@react-oauth/google";
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode";
 import client from "../client";
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const responseGoogle = (response) => {
-   const decode = jwt_decode(response.credential)
-  //  console.log(decode);
-    const {name , sub , picture} = decode;
-   localStorage.setItem('user' , JSON.stringify(response.credential))
+    const decode = jwt_decode(response.credential);
+    console.log(decode);
+    const { name, sub, picture } = decode;
     const doc = {
-      _id : sub,
-      _type: 'user',
-      userName : name,
-      image:picture,
-    }
-    client.createIfNotExists(doc)
-.then(()=>{
-  navigate('/' , {replace:true})
-}).catch((err)=>{
-console.log(err);
-})
-
+      _id: sub,
+      _type: "user",
+      userName: name,
+      image: picture,
+    };
+    client
+      .createIfNotExists(doc)
+      .then(() => {
+        localStorage.setItem("user", JSON.stringify(decode));
+        navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -53,7 +54,7 @@ console.log(err);
                   type="button"
                   className=" bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
                   onClick={renderProps.onClick}
-                  disabled ={renderProps.disabled}
+                  disabled={renderProps.disabled}
                 >
                   <FcGoogle className=" mr-4" /> Sign in with google
                 </button>
