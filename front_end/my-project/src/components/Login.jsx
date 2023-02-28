@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import jwt_decode from "jwt-decode";
-import client from "../client";
+import {client} from "../client";
 const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (response) => {
