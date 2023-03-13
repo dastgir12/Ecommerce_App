@@ -48,6 +48,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   };
 
   const imageUrl = image ? urlFor(image).width(250).url() : null;
+  
   return (
     <div className="m-2">
       <div

@@ -146,5 +146,6 @@ const PinDetail = ({ user }) => {
     </>
   );
 };
+//here we define our routes are u getting the po
 
 export default PinDetail;
